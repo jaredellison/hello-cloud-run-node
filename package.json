@@ -1,0 +1,30 @@
+{
+  "name": "hello-cloud-run-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node dist/server.js",
+    "lint": "eslint src",
+    "typecheck": "tsc",
+    "clean": "rm -rf dist",
+    "build": "etsc"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pino-gcp-logger": "^0.0.15",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@tsconfig/node18-strictest-esm": "^1.0.1",
+    "@types/express": "^4.17.14",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
+    "esbuild": "^0.15.15",
+    "esbuild-node-tsc": "^2.0.4",
+    "eslint": "^8.28.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.3"
+  }
+}
