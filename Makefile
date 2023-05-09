@@ -1,7 +1,7 @@
 include .env
 export
 
-CONTAINER_IMAGE_NAME := ${GCP_HOSTNAME}/${GCP_PROJECT_ID}/${GCP_TARGET_IMAGE_NAME}:latest
+CONTAINER_IMAGE_NAME := ${GCP_CONTAINER_REGISTRY_HOSTNAME}/${GCP_PROJECT_ID}/${GCP_TARGET_IMAGE_NAME}:latest
 
 # ---------------------------------------- #
 # Docker Build Commands
