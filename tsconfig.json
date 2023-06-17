@@ -1,5 +1,9 @@
 {
-  "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
+  "extends": [
+    "@tsconfig/node18/tsconfig",
+    "@tsconfig/strictest/tsconfig",
+    "@tsconfig/esm/tsconfig.json"
+  ],
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

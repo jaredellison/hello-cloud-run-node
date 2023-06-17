@@ -1,4 +1,5 @@
-import { createLogger, logLevel } from 'pino-gcp-logger';
+import { createLogger } from 'pino-gcp-logger';
+import type { logLevel } from 'pino-gcp-logger';
 import { AsyncLocalStorage } from 'async_hooks';
 import type { RequestHandler } from 'express';
 

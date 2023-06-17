@@ -84,10 +84,20 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@tsconfig/node18-strictest-esm@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@tsconfig/node18-strictest-esm/-/node18-strictest-esm-1.0.1.tgz"
-  integrity sha512-cHzmAqw7CMbyqROWeBgVhard3F2V6zxOSJnQ4E6SJWruXD5ypuP9/QKekwBdfXQ4oUTaizIICKIwb+v3v33t0w==
+"@tsconfig/esm@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@tsconfig/esm/-/esm-1.0.3.tgz#a32d35b93eeb5851881094444a1aca9acd064df7"
+  integrity sha512-Gp56rIc3R8ab032nXMUitmc7YIb4nAi8DQ6Qt47tuL0Ssn9LIOm+o2FQmqPu3jX4z0TsqgzWwkmVygxcq+yHYg==
+
+"@tsconfig/node18@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node18/-/node18-2.0.1.tgz#2d2e11333ef2b75a4623203daca264e6697d693b"
+  integrity sha512-UqdfvuJK0SArA2CxhKWwwAWfnVSXiYe63bVpMutc27vpngCntGUZQETO24pEJ46zU6XM+7SpqYoMgcO3bM11Ew==
+
+"@tsconfig/strictest@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/strictest/-/strictest-2.0.1.tgz#c8f42be4d2c8a8fcef0afd482b730c1d55733776"
+  integrity sha512-7JHHCbyCsGUxLd0pDbp24yz3zjxw2t673W5oAP6HCEdr/UUhaRhYd3SSnUsGCk+VnPVJVA4mXROzbhI+nyIk+w==
 
 "@types/body-parser@*":
   version "1.19.2"
