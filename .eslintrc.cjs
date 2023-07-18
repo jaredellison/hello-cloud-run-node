@@ -5,4 +5,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   root: true,
   ignorePatterns: ['load-tests/**/*.js'],
+  env: {
+    node: true,
+  },
 };

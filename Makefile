@@ -1,13 +1,13 @@
 include .env
 export
 
-CONTAINER_IMAGE_NAME := ${GCP_HOSTNAME}/${GCP_PROJECT_ID}/${GCP_TARGET_IMAGE_NAME}:latest
+CONTAINER_IMAGE_NAME := ${GCP_CONTAINER_REGISTRY_HOSTNAME}/${GCP_PROJECT_ID}/${GCP_TARGET_IMAGE_NAME}:latest
 
 # ---------------------------------------- #
 # Docker Build Commands
 # ---------------------------------------- #
 docker-build:
-	docker build . --tag ${CONTAINER_IMAGE_NAME}
+	docker build . --tag ${CONTAINER_IMAGE_NAME} --platform linux/amd64
 
 docker-run:
 	docker run --name ${GCP_TARGET_IMAGE_NAME} -d -p 3000:3000 ${CONTAINER_IMAGE_NAME}
