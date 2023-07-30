@@ -1,8 +1,8 @@
 import express from 'express';
 import logger, { loggerContextMiddleware } from './logger';
+import config from './config';
 
 const app = express();
-const port = process.env['PORT'] || '3000';
 
 app.get('/', loggerContextMiddleware, (_, res) => {
   logger.info('hello logger');
@@ -14,6 +14,6 @@ app.get('/', loggerContextMiddleware, (_, res) => {
   res.send('Hello World!');
 });
 
-app.listen(port, () => {
-  logger.info(`Example app listening on port ${port}`);
+app.listen(config.port, () => {
+  logger.info(`Example app listening on port ${config.port}`);
 });
