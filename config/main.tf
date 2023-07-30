@@ -13,7 +13,7 @@ data "external" "git" {
   program = [
     "git",
     "log",
-    "--pretty=format:{ \"sha\": \"%H\" }",
+    "--pretty=format:{ \"sha\": \"%h8\" }",
     "-1",
     "HEAD"
   ]
@@ -39,10 +39,11 @@ resource "google_cloud_run_service" "run_service" {
   template {
     spec {
       containers {
-        image = format("%s/%s/%s:latest",
+        image = format("%s/%s/%s:%s",
           var.gcp_container_registry_host,
           var.gcp_project,
-          var.gcp_target_image_name
+          var.gcp_target_image_name,
+          data.external.git.result.sha
         )
         env {
           name  = "IS_GCP"
@@ -54,7 +55,7 @@ resource "google_cloud_run_service" "run_service" {
         }
         env {
           name  = "GIT_VERSION"
-          value = substr(data.external.git.result.sha, 0, 8)
+          value = data.external.git.result.sha
         }
         env {
           name  = "SERVICE_NAME"
