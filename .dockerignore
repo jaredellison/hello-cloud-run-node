@@ -1,3 +1,5 @@
-dist
-node_modules
-.env
+*
+!package.json
+!yarn.lock
+!src
+!build.mjs
