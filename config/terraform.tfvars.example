@@ -1,0 +1,5 @@
+gcp_project              = ""
+gcp_region               = ""
+gcp_target_image_name    = ""
+gcp_container_registry_host       = ""
+gcp_cloud_run_service_name         = ""
