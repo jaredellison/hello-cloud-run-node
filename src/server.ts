@@ -1,6 +1,8 @@
 import express from 'express';
 import logger, { loggerContextMiddleware } from './logger';
 import config from './config';
+import { recordDuration } from './metrics';
+import task from './task';
 
 const app = express();
 
@@ -12,6 +14,13 @@ app.get('/', loggerContextMiddleware, (_, res) => {
   logger.error(new Error('There was an error'));
 
   res.send('Hello World!');
+});
+
+app.get('/task', loggerContextMiddleware, async (_, res) => {
+  const finishRecording = recordDuration('task');
+  await task();
+  finishRecording();
+  res.sendStatus(200);
 });
 
 app.listen(config.port, () => {
