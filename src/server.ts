@@ -6,6 +6,8 @@ import task from './task';
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', loggerContextMiddleware, (_, res) => {
   logger.info('hello logger');
 
@@ -20,6 +22,11 @@ app.get('/task', loggerContextMiddleware, async (_, res) => {
   const finishRecording = recordDuration('task');
   await task();
   finishRecording();
+  res.sendStatus(200);
+});
+
+app.post('/query', loggerContextMiddleware, async (req, res) => {
+  logger.info('req.body:', req.body);
   res.sendStatus(200);
 });
 
