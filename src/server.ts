@@ -26,6 +26,7 @@ app.get('/task', loggerContextMiddleware, async (_, res) => {
 });
 
 app.post('/query', loggerContextMiddleware, async (req, res) => {
+  console.log('req.headers:', JSON.stringify(req.headers, null, 2));
   console.log('console.log(req.body):', JSON.stringify(req.body, null, 2));
   logger.info('req.body:', req.body);
   res.sendStatus(200);
