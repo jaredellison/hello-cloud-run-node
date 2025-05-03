@@ -1,3 +1,11 @@
 node_modules
 dist
 .env
+
+# Terraform
+## Binaries and Deployment State
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+## Deployment variables
+*.tfvars

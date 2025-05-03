@@ -1,8 +1,12 @@
 import express from 'express';
 import logger, { loggerContextMiddleware } from './logger';
+import config from './config';
+import { recordDuration } from './metrics';
+import task from './task';
 
 const app = express();
-const port = process.env['PORT'] || '3000';
+
+app.use(express.json());
 
 app.get('/', loggerContextMiddleware, (_, res) => {
   logger.info('hello logger');
@@ -14,6 +18,20 @@ app.get('/', loggerContextMiddleware, (_, res) => {
   res.send('Hello World!');
 });
 
-app.listen(port, () => {
-  logger.info(`Example app listening on port ${port}`);
+app.get('/task', loggerContextMiddleware, async (_, res) => {
+  const finishRecording = recordDuration('task');
+  await task();
+  finishRecording();
+  res.sendStatus(200);
+});
+
+app.post('/query', loggerContextMiddleware, async (req, res) => {
+  console.log('req.headers:', JSON.stringify(req.headers, null, 2));
+  console.log('console.log(req.body):', JSON.stringify(req.body, null, 2));
+  logger.info('req.body:', req.body);
+  res.sendStatus(200);
+});
+
+app.listen(config.port, () => {
+  logger.info(`Example app listening on port ${config.port}`);
 });

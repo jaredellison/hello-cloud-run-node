@@ -12,6 +12,11 @@
     "build": "node build.mjs"
   },
   "dependencies": {
+    "@google-cloud/opentelemetry-cloud-monitoring-exporter": "^0.17.0",
+    "@opentelemetry/api": "^1.4.1",
+    "@opentelemetry/resources": "^1.15.1",
+    "@opentelemetry/sdk-metrics": "^1.15.1",
+    "@opentelemetry/semantic-conventions": "^1.15.1",
     "express": "^4.18.2",
     "pino-gcp-logger": "^0.0.15",
     "source-map-support": "^0.5.21"

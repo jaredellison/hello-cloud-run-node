@@ -1,12 +1,14 @@
 include .env
 export
 
-CONTAINER_IMAGE_NAME := ${GCP_CONTAINER_REGISTRY_HOSTNAME}/${GCP_PROJECT_ID}/${GCP_TARGET_IMAGE_NAME}:latest
+GIT_SHA := `git log --pretty=format:'%h8' -1 HEAD`
+CONTAINER_IMAGE_NAME := ${GCP_CONTAINER_REGISTRY_HOSTNAME}/${GCP_PROJECT_ID}/${GCP_TARGET_IMAGE_NAME}:${GIT_SHA}
 
 # ---------------------------------------- #
 # Docker Build Commands
 # ---------------------------------------- #
 docker-build:
+	bash -c 'test -z "$$(git status --porcelain)" && exit 0 || echo "Please commit changes before building and tagging an image." && exit 1;'
 	docker build . --tag ${CONTAINER_IMAGE_NAME} --platform linux/amd64
 
 docker-run:
@@ -23,28 +25,17 @@ docker-clean:
 	docker container rm $(CONTAINER_IMAGE_NAME)
 
 # ---------------------------------------- #
-# Cloud Run Deployment Commands
+# Terraform Commands
 # ---------------------------------------- #
-gcloud-deploy:
-	gcloud run deploy ${GCP_SERVICE_NAME} \
-		--min-instances 0 \
-		--max-instances 1 \
-		--region ${GCP_REGION} \
-		--image ${CONTAINER_IMAGE_NAME} \
-		--allow-unauthenticated \
-		--set-env-vars GCP_PROJECT_ID=${GCP_PROJECT_ID},IS_GCP=${IS_GCP}
 
-gcloud-service-delete:
-	gcloud run services delete ${GCP_SERVICE_NAME} \
-		--region ${GCP_REGION} \
-		--quiet
+terraform-init:
+	cd ./config && terraform init
 
-gcloud-container-delete:
-	gcloud container images delete ${CONTAINER_IMAGE_NAME}\
-		--quiet
+terraform-validate:
+	cd ./config && terraform validate
 
-gcloud-first-deploy: docker-build docker-push gcloud-deploy
+terraform-plan:
+	cd ./config && terraform plan
 
-gcloud-rebuild: gcloud-clean docker-build docker-push gcloud-deploy
-
-gcloud-clean: gcloud-service-delete gcloud-container-delete
+terraform-apply:
+	cd ./config && terraform apply
